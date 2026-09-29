@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Restaurant</title>
+</head>
+
+<body>
+
+    {% if user.is_authenticated %}
+
+        <p>Welcome, {{ user.username }}!</p>
+
+        <a href="{% url 'add_food' %}">
+            Add New Food
+        </a>
+
+        <br><br>
+
+        <a href="{% url 'logout' %}">
+            Logout
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'login' %}">
+            Login
+        </a>
+
+        |
+
+        <a href="{% url 'register' %}">
+            Register
+        </a>
+
+    {% endif %}
+
+
+    <h1>Welcome to My Restaurant</h1>
+
+    <p>Delicious food made with love.</p>
+
+    <h2>Our Menu</h2>
+
+
+    {% for food in foods %}
+
+        <div>
+
+            <h3>{{ food.name }}</h3>
+
+            {% if food.image %}
+                <img src="{{ food.image.url }}" width="200">
+            {% endif %}
+
+            <p>{{ food.description }}</p>
+
+            <p>₹{{ food.price }}</p>
+            <a href="{% url 'edit_food' food.id %}">
+    Edit
+</a>
+
+|
+
+<a href="{% url 'delete_food' food.id %}">
+    Delete
+</a>
+
+<hr>
+
+        </div>
+
+    {% empty %}
+
+        <p>No food items available.</p>
+
+    {% endfor %}
+
+</body>
+
+</html>

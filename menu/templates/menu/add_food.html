@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add Food</title>
+</head>
+
+<body>
+
+    <h1>Add New Food</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Add Food
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="{% url 'home' %}">
+        Back to Home
+    </a>
+
+</body>
+
+</html>
